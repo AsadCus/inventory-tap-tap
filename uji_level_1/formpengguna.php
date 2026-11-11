@@ -1,8 +1,7 @@
 <?php
 include 'connect.php';
 $no_p = $_GET['no_pengguna'];
-$sql = "SELECT * FROM pengguna WHERE no_pengguna='$no_p'";
-$query = mysqli_query($connect, $sql);
+$query = mysqli_execute_query($connect, "SELECT * FROM pengguna WHERE no_pengguna=?", [$no_p]);
 $pengguna= mysqli_fetch_assoc($query);
 
 if(mysqli_num_rows($query) < 1 ){

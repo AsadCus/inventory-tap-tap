@@ -11,20 +11,18 @@ $dikembalikan = isset($_POST['dikembalikan']) ? $_POST['dikembalikan'] : '';
 // $sql = "INSERT INTO peminjaman (id_peminjaman, id_barang, jumlah_dipinjam, no_pengguna, tgl_pinjam, dikembalikan) VALUES ('$id_peminjaman', '$id_barang', '$jumlah_dipinjam', '$no_pengguna', '$tgl_pinjam', '$dikembalikan')";
 // $query = mysqli_query($connect, $sql);
 
-$sql = "INSERT INTO peminjaman (id_peminjaman, no_pengguna) VALUES ('$id_peminjaman','$no_pengguna')";
-$query = mysqli_query($connect, $sql);
+$query = mysqli_execute_query($connect, "INSERT INTO peminjaman (id_peminjaman, no_pengguna) VALUES (?,?)", [$id_peminjaman, $no_pengguna]);
 if ($query) {
-    $sql = "INSERT INTO detail_peminjaman (id_peminjaman, id_barang, jumlah_dipinjam) VALUES ('$id_peminjaman','$id_barang','$jumlah_dipinjam')";
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "INSERT INTO detail_peminjaman (id_peminjaman, id_barang, jumlah_dipinjam) VALUES (?,?,?)", [$id_peminjaman, $id_barang, $jumlah_dipinjam]);
     if ($query) {
         // header('Location: peminjaman.php');
         $sql = "SELECT pengguna.nama_pengguna, pengguna.no_pengguna, pengguna.fileActualExt, barang.nama_barang, detail_peminjaman.jumlah_dipinjam,peminjaman.id_peminjaman, peminjaman.tgl_pinjam FROM pengguna, barang, detail_peminjaman, peminjaman
         WHERE pengguna.no_pengguna = peminjaman.no_pengguna &&
         barang.id_barang = detail_peminjaman.id_barang &&
         peminjaman.id_peminjaman = detail_peminjaman.id_peminjaman &&
-        peminjaman.id_peminjaman = '$id_peminjaman'";
+        peminjaman.id_peminjaman = ?";
 
-        $query = mysqli_query($connect, $sql);
+        $query = mysqli_execute_query($connect, $sql, [$id_peminjaman]);
         while($resi = mysqli_fetch_array($query)){
         
             echo "<div class='resi-large'>";

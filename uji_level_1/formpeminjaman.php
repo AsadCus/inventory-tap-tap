@@ -1,8 +1,7 @@
 <?php
 include 'connect.php';
     $id_pinjam = $_GET['id_peminjaman'];
-    $sql = "SELECT * FROM peminjaman WHERE id_peminjaman='$id_pinjam'";
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "SELECT * FROM peminjaman WHERE id_peminjaman=?", [$id_pinjam]);
     $pinjam= mysqli_fetch_assoc($query);
 
 if(mysqli_num_rows($query) < 1 ) {

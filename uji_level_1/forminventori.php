@@ -1,8 +1,7 @@
 <?php
 include 'connect.php';
     $id_iv = $_GET['id_inventori'];
-    $sql = "SELECT * FROM inventori WHERE id_inventori='$id_iv'";
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "SELECT * FROM inventori WHERE id_inventori=?", [$id_iv]);
     $barang= mysqli_fetch_assoc($query);
 
 if(mysqli_num_rows($query) < 1 ) {

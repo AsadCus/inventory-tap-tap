@@ -27,8 +27,7 @@ if(isset($_POST['simpan_pengguna'])) {
     }
 
 
-    $sql = "INSERT INTO pengguna (no_pengguna, nama_pengguna, kategori, fileActualExt) VALUES ('$no_pgn','$nama','$kategori','$fileActualExt')";
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "INSERT INTO pengguna (no_pengguna, nama_pengguna, kategori, fileActualExt) VALUES (?,?,?,?)", [$no_pgn, $nama, $kategori, $fileActualExt]);
     if ($query) {
         header('Location: pengguna.php');
     }else {
@@ -41,8 +40,7 @@ if(isset($_POST['simpan_pegawai'])) {
     $no_pgw = $_POST['id_pegawai'];
     $nama_pgw = $_POST['nama_pegawai'];
 
-    $sql = "INSERT INTO pegawai (id_pegawai, nama_pegawai) VALUES ('$no_pgw','$nama_pgw')";
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "INSERT INTO pegawai (id_pegawai, nama_pegawai) VALUES (?,?)", [$no_pgw, $nama_pgw]);
     if ($query) {
         header('Location: pegawai.php');
     }else {
@@ -58,14 +56,9 @@ if(isset($_POST['simpan_barang'])) {
     $jumlah_brg = $_POST['jumlah_barang'];
     $kondisi    = $_POST['kondisi'];
 
-    $sql =
-    "INSERT INTO barang (id_barang, nama_barang, stok, tersedia) VALUES ('$no_brg','$nama_brg','$jumlah_brg','$jumlah_brg');";
-
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "INSERT INTO barang (id_barang, nama_barang, stok, tersedia) VALUES (?,?,?,?)", [$no_brg, $nama_brg, $jumlah_brg, $jumlah_brg]);
     if ($query) {
-        $sql = "INSERT INTO inventori (id_barang, jenis_barang, jumlah_barang, kondisi) VALUES ('$no_brg','$jenis_brg','$jumlah_brg','$kondisi');";
-
-        $query = mysqli_query($connect, $sql);
+        $query = mysqli_execute_query($connect, "INSERT INTO inventori (id_barang, jenis_barang, jumlah_barang, kondisi) VALUES (?,?,?,?)", [$no_brg, $jenis_brg, $jumlah_brg, $kondisi]);
         if ($query) {
             header('Location: barang.php');
         }else {

@@ -8,9 +8,7 @@ if (isset($_POST['simpanpeminjaman'])) {
     $tgl = $_POST['tgl_pinjam'];
     $kembali = $_POST['dikembalikan'];
 
-    $sql = "UPDATE peminjaman SET dikembalikan='$kembali' WHERE id_peminjaman='$id_pinjam';";
-
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "UPDATE peminjaman SET dikembalikan=? WHERE id_peminjaman=?", [$kembali, $id_pinjam]);
     if ($query) {
         header('Location: peminjaman.php');
     }else {
@@ -24,9 +22,7 @@ if (isset($_POST['simpanpengguna'])) {
     $nama_p = $_POST['nama_pengguna'];
     $ktg = $_POST['kategori'];
 
-    $sql = "UPDATE pengguna SET nama_pengguna='$nama_p', kategori='$ktg' WHERE no_pengguna='$no_p';";
-
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "UPDATE pengguna SET nama_pengguna=?, kategori=? WHERE no_pengguna=?", [$nama_p, $ktg, $no_p]);
     if ($query) {
         header('Location: pengguna.php');
     }else {
@@ -39,9 +35,7 @@ if (isset($_POST['simpanpegawai'])) {
     $id_p = $_POST['id_pegawai'];
     $nama_p = $_POST['nama_pegawai'];
 
-    $sql = "UPDATE pegawai SET nama_pegawai='$nama_p' WHERE id_pegawai='$id_p';";
-
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "UPDATE pegawai SET nama_pegawai=? WHERE id_pegawai=?", [$nama_p, $id_p]);
     if ($query) {
         header('Location: pegawai.php');
     }else {
@@ -54,9 +48,7 @@ if (isset($_POST['simpanbarang'])) {
     $id_b = $_POST['id_barang'];
     $nama_b = $_POST['nama_barang'];
 
-    $sql = "UPDATE barang SET nama_barang='$nama_b' WHERE id_barang='$id_b';";
-
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "UPDATE barang SET nama_barang=? WHERE id_barang=?", [$nama_b, $id_b]);
     if ($query) {
         header('Location: barang.php');
     }else {
@@ -71,9 +63,7 @@ if (isset($_POST['simpaninventori'])) {
     $jumlah_b = $_POST['jumlah_barang'];
     $kondisi = $_POST['kondisi'];
 
-    $sql = "UPDATE inventori SET jumlah_barang='$jumlah_b', kondisi='$kondisi' WHERE id_inventori='$id_iv'";
-
-    $query = mysqli_query($connect, $sql);
+    $query = mysqli_execute_query($connect, "UPDATE inventori SET jumlah_barang=?, kondisi=? WHERE id_inventori=?", [$jumlah_b, $kondisi, $id_iv]);
     if ($query) {
         header('Location: inventori.php');
     }else {

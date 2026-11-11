@@ -1,8 +1,7 @@
 <?php
 include 'connect.php';
 $id_b = $_GET['id_barang'];
-$sql = "SELECT * FROM barang WHERE id_barang='$id_b'";
-$query = mysqli_query($connect, $sql);
+$query = mysqli_execute_query($connect, "SELECT * FROM barang WHERE id_barang=?", [$id_b]);
 $barang= mysqli_fetch_assoc($query);
 
 if(mysqli_num_rows($query) < 1 ){

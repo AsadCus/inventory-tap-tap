@@ -4,8 +4,7 @@ include 'connect.php';
 // HAPUS DATA PENGGUNA
 if (isset($_GET['no_pengguna'])) {
     $no_pgn = $_GET['no_pengguna'];
-    $sql = "DELETE FROM pengguna WHERE no_pengguna='$no_pgn'";
-    $query = mysqli_query($connect,$sql);
+    $query = mysqli_execute_query($connect, "DELETE FROM pengguna WHERE no_pengguna=?", [$no_pgn]);
 
     if ($query) {
         header('Location: pengguna.php');
@@ -17,8 +16,7 @@ if (isset($_GET['no_pengguna'])) {
 // HAPUS DATA PEGAWAI
 if (isset($_GET['id_pegawai'])) {
     $id_pgw = $_GET['id_pegawai'];
-    $sql = "DELETE FROM pegawai WHERE id_pegawai='$id_pgw'";
-    $query = mysqli_query($connect,$sql);
+    $query = mysqli_execute_query($connect, "DELETE FROM pegawai WHERE id_pegawai=?", [$id_pgw]);
 
     if ($query) {
         header('Location: pegawai.php');
@@ -56,12 +54,10 @@ if (isset($_GET['id_pegawai'])) {
 // SEKALIGUS INVENTORI DAN BARANG
 if (isset($_GET['id_barang'])) {
     $id_brg = $_GET['id_barang'];
-    $sql = "DELETE FROM inventori WHERE id_barang='$id_brg'";
-    $query = mysqli_query($connect,$sql);
+    $query = mysqli_execute_query($connect, "DELETE FROM inventori WHERE id_barang=?", [$id_brg]);
 
     if ($query) {
-        $sql = "DELETE FROM barang WHERE id_barang='$id_brg'";
-        $query = mysqli_query($connect,$sql);
+        $query = mysqli_execute_query($connect, "DELETE FROM barang WHERE id_barang=?", [$id_brg]);
         if ($query) {
             header('Location: barang.php');
         }else{
@@ -75,8 +71,7 @@ if (isset($_GET['id_barang'])) {
 // PEMINJAMAN
 if (isset($_GET['id_peminjaman'])) {
     $id_pinjam = $_GET['id_peminjaman'];
-    $sql = "DELETE FROM peminjaman WHERE id_peminjaman='$id_pinjam'";
-    $query = mysqli_query($connect,$sql);
+    $query = mysqli_execute_query($connect, "DELETE FROM peminjaman WHERE id_peminjaman=?", [$id_pinjam]);
 
     if ($query) {
         header('Location: peminjaman.php');
